@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-VLGray: hsl(0, 0%, 98%);
+  --color-Purple: hsl(234, 39%, 85%);
+  --color-LGray: hsl(233, 11%, 84%);
+  --color-Gray: hsl(236, 9%, 61%);
+  --color-Navy: hsl(235, 19%, 35%);
+  --color-DNavy: hsl(235, 21%, 11%);
+  --color-DeepNavy: hsl(235, 24%, 19%);
+  --color-Mypurple: hsl(234, 39%, 85%);
+  --color-MyPurpleHov: hsl(236, 33%, 92%);
+  --color-DeepPurple: hsl(235, 16%, 43%);
+  --color-DPurple: hsl(233, 14%, 35%);
+  --color-VeryDPurple: hsl(237, 14%, 26%);
+  --color-DGray: hsl(236, 9%, 61%);
+  --color-dynamic: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  --font-weight-light: 400;
+  --font-weight-bold: 700;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: "Josefin Sans", sans-serif;
+  }
+}
