@@ -63,77 +63,102 @@ function renderTodo(list = Todo) {
 
   list.forEach((td, index) => {
     const div = document.createElement("div");
-   div.className = "border-b border-Gray";
+    div.className = "border-b border-Gray";
+    
+    // Enable drag & drop
+    div.draggable = true;
+    div.dataset.index = index;
 
-div.innerHTML = `
-  <div class="flex items-center justify-between py-3 px-4 group">
+    div.innerHTML = `
+      <div class="flex items-center justify-between py-3 px-4 group">
 
-    <!-- Left side: check + text -->
-    <div class="flex items-center gap-4">
+        <!--check + text -->
+        <div class="flex items-center gap-4">
 
-      <!-- Check circle -->
-      <div class="Todocheck rounded-full min-w-5 min-h-5 w-5 h-5 
-        border border-(--border-todocheck) cursor-pointer flex items-center justify-center
-        ${td.done ? "bg-[linear-gradient(hsl(192,100%,67%),hsl(280,87%,65%))] border-none" : ""}">
-        
-        <img 
-          src="./images/icon-check.svg" 
-          alt="checkIcon" 
-          class="checker w-3 h-3 ${td.done ? "" : "hidden"}"
+          <!-- Check circle -->
+          <div class="Todocheck rounded-full min-w-5 min-h-5 w-5 h-5 
+            border border-(--border-todocheck) cursor-pointer flex items-center justify-center
+            ${td.done ? "bg-[linear-gradient(hsl(192,100%,67%),hsl(280,87%,65%))] border-none" : ""}">
+            
+            <img 
+              src="./images/icon-check.svg" 
+              alt="checkIcon" 
+              class="checker w-3 h-3 ${td.done ? "" : "hidden"}"
+            >
+          </div>
+
+          <!-- Todo text -->
+          <span class="text-sm ${td.done ? "line-through opacity-50" : ""}">
+            ${td.text}
+          </span>
+
+        </div>
+
+        <!--delete icon -->
+        <img
+          src="./images/icon-cross.svg"
+          alt="Delete todo"
+          class="cross w-4 h-4 opacity-0 group-hover:opacity-100 transition cursor-pointer"
+          data-index="${index}"
         >
       </div>
+    `;
 
-      <!-- Todo text -->
-      <span class="text-sm ${td.done ? "line-through opacity-50" : ""}">
-        ${td.text}
-      </span>
-
-    </div>
-
-    <!-- Right side: delete icon -->
-    <img
-      src="./images/icon-cross.svg"
-      alt="Delete todo"
-      class="cross w-4 h-4 opacity-0 group-hover:opacity-100 transition cursor-pointer"
-      data-index="${index}"
-    >
-  </div>
-`;
-
-  
     const check = div.querySelector(".Todocheck");
     const del = div.querySelector(".cross");
 
+    // Toggle check
     check.addEventListener("click", () => {
       td.done = !td.done;
-       saveTodos();
-        renderTodo();
+      saveTodos();
+      renderTodo();
     });
 
+    // Show delete icon on hover/touch
     ["mouseenter", "touchstart"].forEach(evt => {
-      div.addEventListener(evt, () => {
-        del.classList.remove("hidden");
-      });
+      div.addEventListener(evt, () => 
+        del.classList.remove("hidden"));
     });
-
-    div.addEventListener("mouseleave", () => {
-      del.classList.add("hidden");
-    });
+    div.addEventListener("mouseleave", () => del.classList.add("hidden"));
 
     // Delete item
     del.addEventListener("click", () => {
       Todo.splice(index, 1);
-      saveTodos()
+      saveTodos();
+      renderTodo();
+    });
+
+    // Drag and drop!
+    div.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", index);
+    });
+
+    div.addEventListener("dragover", (e) => {
+      e.preventDefault(); // Allow drop
+    });
+
+    div.addEventListener("drop", (e) => {
+      e.preventDefault();
+
+      const startIndex = Number(e.dataTransfer.getData("text/plain"));
+      const endIndex = Number(div.dataset.index);
+
+      // Reorder array
+      const moved = Todo.splice(startIndex, 1)[0];
+      Todo.splice(endIndex, 0, moved);
+
+      saveTodos();
       renderTodo();
     });
 
     TodoContainer.appendChild(div);
   });
-  const remaining = Todo.filter(t => !t.done).length;
-  document.querySelectorAll(".Number").forEach(num =>{
-    num.textContent = remaining;
-  })
 
+  // Update remaining count
+  const remaining = Todo.filter(t => !t.done).length;
+  document.querySelectorAll(".Number").forEach(num => {
+    num.textContent = remaining;
+  });
 }
 
 const SunImage = "./images/icon-sun.svg";
