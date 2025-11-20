@@ -1,28 +1,13 @@
 @import "tailwindcss";
 
-@theme {
-  --color-VLGray: hsl(0, 0%, 98%);
-  --color-Purple: hsl(234, 39%, 85%);
-  --color-LGray: hsl(233, 11%, 84%);
-  --color-Gray: hsl(236, 9%, 61%);
-  --color-Navy: hsl(235, 19%, 35%);
-  --color-DNavy: hsl(235, 21%, 11%);
-  --color-DeepNavy: hsl(235, 24%, 19%);
-  --color-Mypurple: hsl(234, 39%, 85%);
-  --color-MyPurpleHov: hsl(236, 33%, 92%);
-  --color-DeepPurple: hsl(235, 16%, 43%);
-  --color-DPurple: hsl(233, 14%, 35%);
-  --color-VeryDPurple: hsl(237, 14%, 26%);
-  --color-DGray: hsl(236, 9%, 61%);
-  --color-dynamic: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-  --font-weight-light: 400;
-  --font-weight-bold: 700;
-}
-
 @layer base {
-  :root {
+  html {
     color-scheme: light;
   }
+html, body {
+  min-height: 100%;
+}
+
   html.dark {
     color-scheme: dark;
   }
@@ -31,3 +16,59 @@
     font-family: "Josefin Sans", sans-serif;
   }
 }
+
+/*  Theme Variables    */
+@theme {
+  --color-VLGray: hsl(0, 0%, 98%);
+  --color-Purple: hsl(234, 39%, 85%);
+  --color-LGray: hsl(233, 11%, 84%);
+  --color-Gray: hsl(236, 9%, 61%);
+  --color-Navy: hsl(235, 19%, 35%);
+  --color-DGray: hsl(236, 9%, 61%);
+  --color-DPurple: hsl(233, 14%, 35%);
+  --color-DNavy: hsl(235, 21%, 11%);
+  --color-MyPurpleHov: hsl(236, 33%, 92%);
+  --color-DeepPurple: hsl(235, 16%, 43%);
+  --color-VeryDPurple: hsl(237, 14%, 26%);
+  --color-DeepNavy: hsl(235, 24%, 19%);
+  --color-Mypurple: hsl(234, 39%, 85%);
+  --color-blue: hsl(220, 98%, 61%);
+
+  --color-dynamic: linear-gradient(
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
+}
+
+/*  Light Mode */
+:root {
+  --bg-main: var(--color-VLGray);
+  --text: var(--color-DeepNavy);
+  --bg-TodoArea: var(--color-VLGray);
+  --Todotext: var(--color-VLGray);
+  --bg-mobile: url('./images/bg-mobile-light.jpg');
+  --bg-desktop: url('./images/bg-desktop-light.jpg');
+  --border-todocheck: var(--color-Gray);
+  --updateclick: var(--color-DGray)
+}
+
+/*Dark Mode */
+html.dark {
+  --bg-main: var(--color-DNavy);
+  --text: var(--color-LGray);
+  --bg-TodoArea: var(--color-DeepNavy);
+  --bg-mobile: url('./images/bg-mobile-dark.jpg');
+  --bg-desktop: url('./images/bg-desktop-dark.jpg');
+  --updateclick: var(--color-Gray)
+
+}
+    
+
+
+
+
+
+
+
+
+

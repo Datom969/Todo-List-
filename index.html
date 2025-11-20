@@ -1,59 +1,99 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frontend Mentor | Todo app</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
   </style>
   <link rel="stylesheet" href="./output.css">
 </head>
-<body class="antialiased m-0 p-0 font-[Josefin Sans] relative">
 
-<header class="relative h-[30vh]">
-  <!-- MOBILE BACKGROUND -->
-  <div class="bg-[url('./images/bg-mobile-light.jpg')] dark:bg-[url('./images/bg-mobile-dark.jpg')] md:hidden w-full h-full bg-cover bg-center">
-    <div class="flex justify-between items-center p-6 h-full text-VLGray">
-      <h2 class="text-3xl font-bold tracking-widest">TODO</h2>
-      <div class="theme-toggle w-8 h-8"><img src="./images/icon-sun.svg" alt="sun icon"></div>
+<body class="antialiased m-0 p-0 font-[Josefin Sans] relative min-h-full bg-(--bg-main)">
+
+  <header class="relative h-[35vh]">
+    <!-- MOBILE BACKGROUND -->
+    <div
+      class="md:hidden w-full h-full bg-cover bg-center" style="background-image: var(--bg-mobile)">
+      <div class="flex justify-between items-center -mt-10 p-6 h-full">
+        <h2 class="text-3xl font-bold tracking-widest text-(--Todotext) ">TODO</h2>
+        <div class="theme-toggle w-8 h-8"><img src="./images/icon-sun.svg" alt="sun icon"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- DESKTOP BACKGROUND -->
-  <div class="bg-[url('./images/bg-desktop-light.jpg')] dark:bg-[url('./images/bg-desktop-dark.jpg')] hidden md:block w-full h-full bg-cover bg-center">
-    <div class="flex justify-evenly items-center px-10 pt-2 h-full text-VLGray">
-      <h2 class="text-4xl font-bold tracking-[0.3em]">TODO</h2>
-      <div class="theme-toggle w-8 h-8"><img src="./images/icon-sun.svg" alt="sun icon"></div>
+    <!-- DESKTOP BACKGROUND -->
+    <div
+      class="hidden md:block w-full h-full bg-cover bg-center" style="background-image: var(--bg-desktop)">
+      <div class="flex justify-evenly items-center -mt-5 px-10 pt-2 h-full">
+        <h2 class="Todotext text-4xl font-bold tracking-widest text-(--Todotext)">TODO</h2>
+        <div class="theme-toggle w-8 h-8"><img src="./images/icon-sun.svg" alt="sun icon"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- INPUT FIELD -->
-  <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[85%] md:w-[40%] z-40">
-    <input
-      type="text"
-      placeholder="Create a new todo..."
-      class="w-full px-10 py-4 rounded-md bg-LGray dark:bg-DeepNavy text-DNavy dark:text-LGray shadow-md focus:outline-none relative" id="TodoInput"><div class="rounded-full w-5 h-5 absolute left-6 border-DPurple border top-1/2 -translate-1/2"></div>
-  </div>
-</header>
-<main class="w-full h-[calc(100vh-30vh)] bg-LGray dark:bg-DNavy relative pt-20 md:pt-24 shadow-inner">
-  <div class="bg-LGray dark:bg-DeepNavy absolute top-10  left-1/2 -translate-x-1/2 w-[85%] md:w-[40%] z-50 text-DNavy dark:text-LGray">
-    <div class="TodoContainer mt-3"></div>
-    <div class="flex justify-between items-center p-4 text-[12px] cursor-pointer">
-    <p><span id="Number" class="mr-1">0</span>items left</p>
-  <p id=showAll>All</p><p id="showActive">Active</p> <p id="showCompleted">Completed</p><p id="clearCompleted">Clear completed</p></div></div>
-</main>
+    <!-- INPUT FIELD -->
+    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-[85%] md:w-[40%] z-40">
+      <input type="text" placeholder="Create a new todo..."
+        class="w-full px-10 py-4 rounded-md shadow-md focus:outline-none relative
+        bg-(--bg-TodoArea) text-(--text) placeholder:text-sm"
+        id="TodoInput">
+      <div class="rounded-full w-5 h-5 absolute left-6 border-DPurple border top-1/2 -translate-1/2">
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full min-h-full relative pt-20 md:pt-24 shadow-inner bg-(--bg-main) mb-3">
+    <section class="TodoArea justify-center items-center m-auto -mt-20 w-[85%] md:w-[40%] z-50 text-(--text) drop-shadow-lg h-auto">
+      <div class="TodoContainer text-(--text) bg-(--bg-TodoArea)"></div>
+      
+      <!--For Desktop-->
+      <div class="hidden md:block">
+      <div class="flex justify-between items-center m-auto p-4 text-sm cursor-pointer text-(--updateclick) h-auto bg-(--bg-TodoArea) rounded-b-md">
+        <p><span class="Number mr-1">0</span>items left</p>
+        <p class="showAll update">All</p>
+        <p class="showActive update">Active</p>
+        <p class="showCompleted update">Completed</p>
+        <p class="clearCompleted update">Clear completed</p>
+      </div>
+      </div>
+
+      <!--For Mobile-->
+
+<div class="md:hidden flex justify-between items-center p-4 text-sm cursor-pointer text-(--updateclick) bg-(--bg-TodoArea) mb-6">
+  <p><span class="Number mr-1">0</span>items left</p>
+  <p class="clearCompleted update">Clear completed</p>
+</div>
+
+<div class="md:hidden flex justify-around items-center m-auto p-4 text-sm cursor-pointer text-(--updateclick) bg-(--bg-TodoArea) rounded-b-md">
+  <p class="showAll update">All</p>
+  <p class="showActive update">Active</p>
+  <p class="showCompleted update">Completed</p>
+</div>
+
+    
+    </section>
+  </main>
 
   <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by
+    <a href="https://www.frontendmentor.io/profile/Datom969">Mustapha Wasiu</a>.
   </div>
+
   <script src="todo.js"></script>
 </body>
+
 </html>
