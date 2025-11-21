@@ -98,7 +98,7 @@ function renderTodo(list = Todo) {
         <img
           src="./images/icon-cross.svg"
           alt="Delete todo"
-          class="cross w-4 h-4 opacity-0 group-hover:opacity-100 transition cursor-pointer"
+          class="cross w-4 h-4 md:opacity-0 md:group-hover:opacity-100 md:transition cursor-pointer"
           data-index="${index}"
         >
       </div>
@@ -113,13 +113,6 @@ function renderTodo(list = Todo) {
       saveTodos();
       renderTodo();
     });
-
-    // Show delete icon on hover/touch
-    ["mouseenter", "touchstart"].forEach(evt => {
-      div.addEventListener(evt, () => 
-        del.classList.remove("hidden"));
-    });
-    div.addEventListener("mouseleave", () => del.classList.add("hidden"));
 
     // Delete item
     del.addEventListener("click", () => {
